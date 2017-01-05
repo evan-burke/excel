@@ -1,4 +1,7 @@
 
+' use this to make functions available to all sheets:
+' https://support.office.com/en-us/article/Create-Custom-Functions-in-Excel-2007-2f06c10b-3622-40d6-a1b2-b6748ae8231f#bmmakingyour
+
 Public Function INET_ATONdd(IP As String) As Double
  
    Dim IPArray As Variant
