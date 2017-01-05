@@ -1,0 +1,35 @@
+
+Public Function INET_ATONdd(IP As String) As Double
+ 
+   Dim IPArray As Variant
+ 
+   IPArray = Split(IP, ".")
+   INET_ATON = (IPArray(0) * 256 ^ 3)
+   INET_ATON = INET_ATON + (IPArray(1) * 256 ^ 2)
+   INET_ATON = INET_ATON + (IPArray(2) * 256)
+   INET_ATON = INET_ATON + IPArray(3)
+ 
+End Function
+
+
+Public Function INET_NTOA(IPNumber As Double) As String
+
+   INET_NTOA = Int(IPNumber / (256 ^ 3))
+   INET_NTOA = INET_NTOA & "."
+   INET_NTOA = INET_NTOA & Int(XMod(IPNumber, (256 ^ 3)) / 256 ^ 2)
+   INET_NTOA = INET_NTOA & "."
+   INET_NTOA = INET_NTOA & Int(XMod(Int(XMod(IPNumber, (256 ^ 3))), (256 ^ 2)) / 256)
+   INET_NTOA = INET_NTOA & "."
+   INET_NTOA = INET_NTOA & XMod(Int(XMod(Int(XMod(IPNumber, (256 ^ 3))), (256 ^ 2))), 256)
+ 
+End Function
+
+
+Function XMod(ByVal Number As Double, ByVal Divisor As Double) As Double
+' VB built in mod function appears to truncate large numbers to int, and doesn't work with the value sizes we need in an inet_ntoa context.
+
+    Number = Int(Abs(Number))
+    Divisor = Int(Abs(Divisor))
+    XMod = Number - (Int(Number / Divisor) * Divisor)
+    
+End Function
